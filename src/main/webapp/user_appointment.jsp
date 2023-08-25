@@ -18,6 +18,7 @@
 	background-repeat: no-repeat;
 }
 </style>
+<%@include file="components/allCss.jsp" %>
 </head>
 <body>
 
@@ -37,21 +38,71 @@
 						<p class="text-center fs-3">User Appointment</p>
 						<c:if test="${ not empty errorMsg }">
 							<p class="text-center fs-4 text-danger">${ errorMsg }</p>
-							<c:remove var="errorMsg" scope ="session"/>
+							<c:remove var="errorMsg" scope="session" />
 						</c:if>
-						
+
 						<c:if test="${ not empty succMsg }">
 							<p class="text-center fs-4 text-success">${ succMsg }</p>
-							<c:remove var="succMsg" scope="session"/>
+							<c:remove var="succMsg" scope="session" />
 						</c:if>
-						
-						<form class="row" action="add_appoint" method="post">
-							
-							x
-						
+
+						<form class="row g-3" action="add_appoint" method="post">
+
+							<input type="hidden" name="userId" value="${userObj.id }" />
+							<div class="col-md-6">
+								<label class="form-label">FullName</label> <input required
+									type="text" class="form-control" name="fullName" />
+							</div>
+							<div class="col-md-6">
+								<label class="form-label">Gender</label> <select
+									class="form-control" name="gender" required>
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+								</select>
+							</div>
+							<div class="col-md-6">
+								<label class="form-label">Age</label> <input type="number"
+									class="form-control" name="age" />
+							</div>
+							<div class="col-md-6">
+								<label class="form-label">Appointment Date</label> <input
+									type="date" class="form-control" required name="appoint_date" />
+							</div>
+							<div class="col-md-6">
+								<label class="form-label">Email</label> <input type="email"
+									required class="form-control" name="email" />
+							</div>
+							<div class="col-md-6">
+								<label class="form-label">Phone NO</label> <input type="number"
+									required class="form-control" name="phone" />
+							</div>
+							<div class="col-md-6">
+
+								<label class="form-label">Diseases</label> <input type="text"
+									required class="form-control" name="diseases" />
+							</div>
+
+							<div class="col-md-6">
+								<label class="form-label">Doctor</label> <select required
+									class="form-control" name="doctor">
+									<option value="">--Select--</option>
+									<option value="">Doctor Name</option>
+								</select>
+							</div>
+							<div class="col-md-12">
+								<label class="form-label">Full Address</label>
+								<textarea required name="address" class="form-control" rows="3"
+									cols=""></textarea>
+							</div>
+							<c:if test="${ empty userObj }">
+								<a href="user_login.jsp" class="col-md-6 offset-md-3 mt-2 btn btn-success">Submit</a>
+							</c:if>
+							<c:if test="${ not empty userObj }">
+								<button class="col-md-6 offest-md-3 btn mt-2 btn-success">Submit</button>
+							</c:if>
 						</form>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
