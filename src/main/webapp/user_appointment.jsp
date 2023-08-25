@@ -1,3 +1,6 @@
+<%@page import="com.entities.Doctor"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dao.DoctorDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -46,7 +49,7 @@
 							<c:remove var="succMsg" scope="session" />
 						</c:if>
 
-						<form class="row g-3" action="add_appoint" method="post">
+						<form class="row g-3" action="add_appointment" method="post">
 
 							<input type="hidden" name="userId" value="${userObj.id }" />
 							<div class="col-md-6">
@@ -86,7 +89,18 @@
 								<label class="form-label">Doctor</label> <select required
 									class="form-control" name="doctor">
 									<option value="">--Select--</option>
-									<option value="">Doctor Name</option>
+									
+									<%
+										DoctorDao dao = new DoctorDao();
+										List<Doctor> list = dao.getAllDoctors();
+										for(Doctor d : list){			
+									%>	
+										<option value="<%= d.getId()%>"><%=d.getFullName()%>
+										 (<%= d.getSpecialist() %>)
+										</option>
+									<%} %>
+									
+									
 								</select>
 							</div>
 							<div class="col-md-12">
