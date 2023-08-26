@@ -34,7 +34,7 @@
 						aria-current="page" href="user_appointment.jsp">APPOINTMENT</a></li>
 
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">VIEW APPOINTMENT</a></li>
+						aria-current="page" href="view_appointment.jsp">VIEW APPOINTMENT</a></li>
 
 					<div class="dropdown">
 						<button class="btn btn-primary dropdown-toggle" type="button"
