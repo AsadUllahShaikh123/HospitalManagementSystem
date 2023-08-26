@@ -12,10 +12,10 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style type="text/css">
-.backImg {
-	background: liner-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)),
+.backImg{
+	background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)),
 		url("img/hospital.jpg");
-	height: 20vh;
+	height: 40vh;
 	width: 100%;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -112,7 +112,7 @@
 								<a href="user_login.jsp" class="col-md-6 offset-md-3 mt-2 btn btn-success">Submit</a>
 							</c:if>
 							<c:if test="${ not empty userObj }">
-								<button class="col-md-6 offest-md-3 btn mt-2 btn-success">Submit</button>
+								<button class="col-md-6 offset-md-3 mt-2 btn btn-success">Submit</button>
 							</c:if>
 						</form>
 					</div>
