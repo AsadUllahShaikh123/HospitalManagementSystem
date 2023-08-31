@@ -71,8 +71,16 @@
 									<td><%=app.getPhoneNo()%></td>
 									<td><%=app.getDiseases()%></td>
 									<td><%=app.getStatus()%></td>
-									<td> 
-										<a href="comment.jsp" class="btn btn-sm btn-success">Comment</a>
+									<td>
+										<%
+										if ("pending".equals(app.getStatus())) {
+										%> <a href="comment.jsp?id=<%=app.getId()%>"
+										class="btn btn-sm btn-success">comment</a> <%
+ 										} else {
+ 										%> <a href="comment.jsp?id=<%=app.getId()%>"
+										class="btn btn-sm btn-success disabled">commented</a> <%
+ 										}
+ 										%>
 									</td>
 								</tr>
 								<%

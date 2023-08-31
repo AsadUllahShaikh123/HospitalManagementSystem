@@ -93,9 +93,49 @@ public class AppointmentDao {
 		}
 		return list;
 	}
+
+	// we are fetching by using id because user_id can be same
+	public Appointment getAppointmentById(int id) throws SQLException, ClassNotFoundException{
+		
+		Appointment appointment = null;
+		Connection connection = DbConnection.getConnection();
+		String query ="select * from appointment where id =? ";
+		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setInt(1, id);
+		ResultSet result = statement.executeQuery();
+		while(result.next()) {
+			appointment = new Appointment();
+			appointment.setId(result.getInt(1));
+			appointment.setUserId(result.getInt(2));
+			appointment.setFullName(result.getString(3));
+			appointment.setGender(result.getString(4));
+			appointment.setAge(result.getString(5));
+			appointment.setAppointDate(result.getString(6));
+			appointment.setEmail(result.getString(7));
+			appointment.setPhoneNo(result.getString(8));
+			appointment.setDiseases(result.getString(9));
+			appointment.setDoctorId(result.getInt(10));
+			appointment.setAddress(result.getString(11));
+			appointment.setStatus(result.getString(12));
+			
+		}
+		return appointment;
+	}
 	
-	
-	
+	public boolean updateCommentStatus(int id,int docId, String comment) throws SQLException, ClassNotFoundException {
+		boolean update = false;
+		Connection connection = DbConnection.getConnection();
+		String sql = "update appointment set status =? where id=? and doctor_id = ? ";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, comment);
+		statement.setInt(2, id);
+		statement.setInt(3, docId);
+		int result = statement.executeUpdate();
+		if(result > 0 ) {
+			update = true;
+		}
+		return update;
+	}
 	
 	
 	
