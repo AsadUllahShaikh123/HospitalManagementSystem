@@ -1,3 +1,9 @@
+<%@page import="com.entities.User"%>
+<%@page import="com.entities.Doctor"%>
+<%@page import="com.dao.DoctorDao"%>
+<%@page import="com.entities.Appointment"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dao.AppointmentDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,7 +14,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<%@include file="components/allCss.jsp" %>
+<%@include file="components/allCss.jsp"%>
 <style>
 .backImg {
 	background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)),
@@ -50,25 +56,49 @@
 								</tr>
 							</thead>
 							<tbody>
+								<%
+								User user = (User) session.getAttribute("userObj");
+								AppointmentDao dao = new AppointmentDao();
+								DoctorDao dao2 = new DoctorDao();
+								List<Appointment> list = dao.getAllAppointmentByLoginUser(user.getId());
+								System.out.println("user id " + user.getId());
+								for (Appointment app : list) {
+									Doctor doctor = dao2.getDoctorById(app.getDoctorId());
+								%>
 								<tr>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
+									<td><%=app.getFullName()%></td>
+									<td><%=app.getGender()%></td>
+									<td><%=app.getAge()%></td>
+									<td><%=app.getAppointDate()%></td>
+									<td><%=app.getDiseases()%></td>
+									<td><%=doctor.getFullName()%></td>
+									<td>
+										<%
+										if ("pending".equals(app.getStatus())) {
+										%>
+										<a href="#" class="btn btn-sm btn-warning">pending</a>
+										<%
+										} else {
+										%>
+											<%=app.getStatus()%>
+										<%
+										}
+										%>
+									</td>
 								</tr>
+								<%
+								}
+								%>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="col-md-3 pe-3 ">
-				<img alt="doctorImage" src = "img/doc5.png" width="100%" height="100%"/>
+				<img alt="doctorImage" src="img/doc5.png" width="100%" height="100%" />
 			</div>
-			
+
 		</div>
 	</div>
 
