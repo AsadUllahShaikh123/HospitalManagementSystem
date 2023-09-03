@@ -1,3 +1,5 @@
+<%@page import="com.db.DbConnection"%>
+<%@page import="com.dao.CountDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -31,12 +33,16 @@
 			<c:remove var="errorMsg" scope="session"/>
 		</c:if>
 		<div class="row">
+		<%
+			CountDao dao = new CountDao(DbConnection.getConnection());
+			
+		%>
 			<div class="col-md-4">
 				<div class="card shadow">
 					<div class="card-body text-center text-primary">
 						<i class="fas fa-user-md fa-3x"></i><br>
 						<p class="fs-4 text-center">
-							Doctor <br> 5
+							Doctor <br> <%= dao.countDoctor() %>
 						</p>
 					</div>
 				</div>
@@ -47,7 +53,7 @@
 					<div class="card-body text-center text-primary">
 						<i class="fas fa-user-circle fa-3x"></i><br>
 						<p class="fs-4 text-center">
-							User <br> 345
+							User <br> <%= dao.countUser() %>
 						</p>
 					</div>
 				</div>
@@ -58,7 +64,7 @@
 					<div class="card-body text-center text-primary">
 						<i class="far fa-calendar-check fa-3x"></i><br>
 						<p class="fs-4 text-center">
-							Total Appointment <br>453
+							Total Appointment <br><%= dao.countAppointment() %>
 						</p>
 					</div>
 				</div>
@@ -70,7 +76,7 @@
 					<div class="card-body text-center text-primary">
 						<i class="fas fa-user-md fa-3x"></i><br>
 						<p class="fs-4 text-center">
-							Specialist <br> 5
+							Specialist <br> <%= dao.countSpecialist() %>
 						</p>
 					</div>
 				</div>

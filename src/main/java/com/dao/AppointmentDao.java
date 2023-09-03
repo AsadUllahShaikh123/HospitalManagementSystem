@@ -137,6 +137,31 @@ public class AppointmentDao {
 		return update;
 	}
 	
+	public List<Appointment> getAllAppointment() throws SQLException, ClassNotFoundException{
+		List<Appointment> list = new ArrayList<Appointment>();
+		Appointment appointment = null;
+		Connection connection = DbConnection.getConnection();
+		String query ="select * from appointment";
+		PreparedStatement statement = connection.prepareStatement(query);
+		ResultSet result = statement.executeQuery();
+		while(result.next()) {
+			appointment = new Appointment();
+			appointment.setId(result.getInt(1));
+			appointment.setUserId(result.getInt(2));
+			appointment.setFullName(result.getString(3));
+			appointment.setGender(result.getString(4));
+			appointment.setAge(result.getString(5));
+			appointment.setAppointDate(result.getString(6));
+			appointment.setEmail(result.getString(7));
+			appointment.setPhoneNo(result.getString(8));
+			appointment.setDiseases(result.getString(9));
+			appointment.setDoctorId(result.getInt(10));
+			appointment.setAddress(result.getString(11));
+			appointment.setStatus(result.getString(12));
+			list.add(appointment);
+		}
+		return list;
+	}
 	
 	
 }
