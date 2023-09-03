@@ -145,8 +145,74 @@ public class DoctorDao {
 	}
 	
 	
+	public boolean checkOldPassword(int userId, String oldPassword) {
+		Connection connection;
+		PreparedStatement statement;
+		boolean checked = false;
+		String query = "select * from doctor where id=? and password=?";
+		try {
+			connection = DbConnection.getConnection();
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, userId);
+			statement.setString(2, oldPassword);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				checked = true;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+
+		
+		return checked;
+	}
+
+	public boolean changePassword(int userId, String password) {
+		Connection connection;
+		String query = "update doctor set password=? where id=?";
+		PreparedStatement statement;
+		int updated = 0;
+		boolean changed = false;
+		try {
+			connection = DbConnection.getConnection();
+			statement = connection.prepareStatement(query);
+			statement.setString(1, password);
+			statement.setInt(2, userId);
+			updated = statement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (updated > 0) {
+			changed = true;
+		}
+		return changed;
+	}
 	
-	
-	
+	public boolean editDoctorProfile(Doctor doctor) throws ClassNotFoundException, SQLException {
+		Connection connection = DbConnection.getConnection();
+		
+		boolean updated = false;
+		
+		String query = "update doctor set fullName=?,dob=?,qualification=?,specialist=?,email=?,mobile=? where id =? ";
+		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1, doctor.getFullName());
+		statement.setString(2, doctor.getDate());
+		statement.setString(3, doctor.getQualification());
+		statement.setString(4, doctor.getSpecialist());
+		statement.setString(5, doctor.getEmail());
+		statement.setString(6, doctor.getMobile());
+		statement.setInt(7, doctor.getId());
+		int id = statement.executeUpdate();
+		if(id > 0) {
+			updated = true;
+		}
+	        
+		
+		return updated;
+	}
 	
 }

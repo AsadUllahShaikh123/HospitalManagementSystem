@@ -20,13 +20,13 @@ public class ChangePassword extends HttpServlet {
        
    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int uid = Integer.parseInt(getServletInfo());
+		int uid = Integer.parseInt(request.getParameter("uid"));
 		String newPassword = request.getParameter("newPassword");
 		String oldPassword = request.getParameter("oldPassword");
 		HttpSession session = request.getSession();
 		UserDao dao = new UserDao();
 		if(dao.checkOldPassword(uid, oldPassword)) {
-			if(dao.changePassword(uid, oldPassword)) {
+			if(dao.changePassword(uid, newPassword)) {
 				session.setAttribute("succMsg", "Password Changed Successfully");
 				response.sendRedirect("changePassword.jsp");
 			}else {
