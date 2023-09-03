@@ -43,7 +43,7 @@
 							<i class="fa-solid fa-circle-user"></i> ${ userObj.name }
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-							<li><a class="dropdown-item" href="#">Change Password</a></li>
+							<li><a class="dropdown-item" href="changePassword.jsp">Change Password</a></li>
 							<li><a class="dropdown-item" href="userLogout">Logout</a></li>
 						</ul>
 					</div>

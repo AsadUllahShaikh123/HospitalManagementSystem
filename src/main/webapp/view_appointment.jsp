@@ -32,6 +32,9 @@
 </head>
 <body>
 	<%@include file="components/navbar.jsp"%>
+	<c:if test="${ empty userObj }">
+		<c:redirect url="user_login.jsp"></c:redirect>
+	</c:if>
 	<div class="container-fluid p-5 backImg">
 		<p class="text-center fs-2 text-white"></p>
 	</div>
